@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const PLANET_LINKS = [
   { title: 'mercury', url: 'planets/mercury', color: 'bg-[#DEF4FC]' },
@@ -12,19 +12,24 @@ const PLANET_LINKS = [
 ];
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       {/* Logo */}
-      <p className='text-white uppercase font-antonio tracking-tighter text-3xl'>
+      <p className='text-white uppercase font-antonio tracking-tighter text-3xl xl:mr-auto'>
         The Planets
       </p>
 
-      <label className='custom-hamburger ml-auto'>
+      <label className='custom-hamburger ml-auto md:hidden'>
         <input
           className='hidden'
           type='checkbox'
           name='hamburger'
           id='hamburger'
+          onChange={() => {
+            setIsOpen(!isOpen);
+          }}
         />
         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='17'>
           <g fill='#FFF' fill-rule='evenodd'>
@@ -34,7 +39,13 @@ export default function Navbar() {
       </label>
 
       {/* Nav Items */}
-      <ul className='absolute left-0 top-[68px] w-full custom-height'>
+      <ul
+        className={`
+        bg-dark-blue absolute left-0 top-[68px] w-full custom-height transition-transform ease duration-500 
+        ${!isOpen ? 'translate-x-full' : 'translate-x-0'} 
+        md:static md:translate-x-0 md:flex md:justify-center md:gap-8 md:mt-8 
+        xl:w-auto xl:h-auto xl:mt-0 xl:bg-transparent`}
+      >
         {PLANET_LINKS.map(({ title, url, color }, index) => {
           return <NavItem key={index} title={title} url={url} color={color} />;
         })}
@@ -51,15 +62,23 @@ type NavProps = {
 
 export const NavItem = ({ title, url, color }: NavProps) => {
   return (
-    <li className='nav-item text-white uppercase px-8'>
+    <li className='nav-item text-white uppercase px-8 md:px-0'>
       <a
-        className='flex items-center py-6 border-b custom-border-color'
+        className='
+        group flex items-center py-6 border-b custom-border-color tracking-[2px] text-sm 
+        md:border-none md:py-0 md:opacity-50 
+        xl:p-8 xl:px-0 custom-hover-effect xl:relative xl:hover:opacity-100 xl:transition-opacity'
         href={`/${url}`}
       >
-        <span className={`w-5 h-5 ${color} rounded-full mr-4`}></span>
+        <span
+          className={`
+          w-5 h-5 ${color} rounded-full mr-4 
+          md:hidden 
+          xl:block xl:absolute xl:top-0 xl:w-full xl:rounded-none xl:h-1 xl:-translate-y-2 xl:group-hover:translate-y-0 xl:transition-transform xl:duration-300`}
+        ></span>
         {title}
         <svg
-          className='ml-auto'
+          className='ml-auto md:hidden'
           xmlns='http://www.w3.org/2000/svg'
           width='6'
           height='8'
