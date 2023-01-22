@@ -27,7 +27,7 @@ module.exports = {
 
       fontFamily: {
         spartan: ['League Spartan', 'sans-seif'],
-        antonio: ['League Spartan', 'sans-seif'],
+        antonio: ['Antonio', 'sans-seif'],
       },
     },
   },
