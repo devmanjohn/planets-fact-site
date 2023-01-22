@@ -34,3 +34,19 @@ button {
   font-weight: bold;
   font-family: 'League Spartan', sans-serif;
 }
+
+.custom-border-color {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item:last-child a {
+  border-bottom: 0px;
+}
+
+.custom-height {
+  height: calc(100vh - 68px);
+}
+
+.custom-hamburger input:checked ~ svg {
+  opacity: 0.3;
+}
