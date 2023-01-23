@@ -1,5 +1,11 @@
 import Head from 'next/head';
+
+// components
 import Header from '../components/header/Header';
+import Content, { StatCards } from '../components/planet/Content';
+import Controls from '../components/planet/Controls';
+import Planet from '../components/planet/Planet';
+import PlanetGrid from '../components/PlanetGrid';
 
 export default function Home() {
   return (
@@ -11,7 +17,14 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header />
-      <main></main>
+      <main>
+        <PlanetGrid>
+          <Planet />
+          <Content />
+          <StatCards />
+          <Controls />
+        </PlanetGrid>
+      </main>
     </>
   );
 }
