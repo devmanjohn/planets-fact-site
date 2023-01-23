@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 function Planet() {
   return (
-    <figure className='relative w-full h-full col-span-3 grid justify-center'>
+    <figure className='relative w-full h-full col-span-3 grid justify-center my-14'>
       <Image
         src='./assets/planet-earth.svg'
         width='173'
