@@ -1,24 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function Controls() {
+const CONTROLS = [
+  {
+    title: 'Overview',
+  },
+  {
+    title: 'Structure',
+  },
+  {
+    title: 'Surface',
+  },
+];
+
+export default function Controls() {
+  const [activeContent, setActiveContent] = useState('Overview');
+
   return (
-    <section className='row-start-1 col-span-3'>
-      <button className=''>
-        <span className='hidden'>01</span>
-        Overview
-      </button>
-
-      <button className=''>
-        <span className='hidden'>02</span>
-        Internal Structure
-      </button>
-
-      <button className=''>
-        <span className='hidden'>03</span>
-        Surface Geology
-      </button>
+    <section className='col-span-4 row-start-1 px-4 border-b custom-border-color flex justify-between'>
+      {CONTROLS.map(({ title }) => {
+        const isActive = title === activeContent ? true : false;
+        return (
+          <ControlButton
+            title={title}
+            isActive={isActive}
+            setActiveContent={setActiveContent}
+          />
+        );
+      })}
     </section>
   );
 }
 
-export default Controls;
+type ControlButtonProps = {
+  title: String;
+  isActive?: Boolean;
+  // setActiveContent needs typing
+};
+
+export function ControlButton({
+  title,
+  isActive,
+  setActiveContent,
+}: ControlButtonProps) {
+  const clickHandler = () => {
+    setActiveContent(title);
+  };
+
+  return (
+    <button
+      onClick={clickHandler}
+      className={`
+      uppercase tracking-[1px] border-b-4 py-4
+      ${isActive ? 'border-earth' : 'border-transparent'}`}
+    >
+      <span className='hidden'>03</span>
+      <p className={`${isActive ? 'opacity-100' : 'opacity-50'}`}>{title}</p>
+    </button>
+  );
+}
