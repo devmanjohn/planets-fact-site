@@ -1,12 +1,13 @@
 import Head from 'next/head';
+import Image from 'next/image';
 
 // components
 import Header from '../components/header/Header';
-import PlanetGrid from '../components/PlanetGrid';
-import Content, { StatCards } from '../components/planet/Content';
-import Controls from '../components/planet/Controls';
+import PlanetModel from '../models/Planet';
+import HomePlanet from '../components/HomePlanet';
 
-export default function Home() {
+export default function Home({ data }: { data: PlanetModel[] }) {
+  console.log(data[0].images);
   return (
     <>
       <Head>
@@ -17,12 +18,21 @@ export default function Home() {
       </Head>
       <Header />
       <main>
-        <PlanetGrid>
-          <Content />
-          <StatCards />
-          <Controls />
-        </PlanetGrid>
+        <ul className='grid grid-cols-1 text-center md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto'>
+          {data.map((planet) => {
+            return <HomePlanet key={planet.name} data={planet} />;
+          })}
+        </ul>
       </main>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch('http://localhost:3000/api/planets');
+  const data = await res.json();
+
+  return {
+    props: { data },
+  };
 }
