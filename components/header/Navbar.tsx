@@ -44,7 +44,7 @@ export default function Navbar() {
         bg-dark-blue absolute left-0 top-[68px] w-full custom-height transition-transform ease duration-500 
         ${!isOpen ? 'translate-x-full' : 'translate-x-0'} 
         md:static md:translate-x-0 md:flex md:justify-center md:gap-8 md:mt-8 
-        xl:w-auto xl:h-auto xl:mt-0 xl:bg-transparent`}
+        xl:w-auto xl:h-auto xl:mt-0 xl:bg-transparent z-10`}
       >
         {PLANET_LINKS.map(({ title, url, color }, index) => {
           return <NavItem key={index} title={title} url={url} color={color} />;

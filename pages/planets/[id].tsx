@@ -1,12 +1,14 @@
+import React from 'react';
 import Head from 'next/head';
 
 // components
-import Header from '../components/header/Header';
-import PlanetGrid from '../components/PlanetGrid';
-import Content, { StatCards } from '../components/planet/Content';
-import Controls from '../components/planet/Controls';
+import Header from '../../components/header/Header';
+import Content, { StatCards } from '../../components/planet/Content';
+import Controls from '../../components/planet/Controls';
+import PlanetGrid from '../../components/PlanetGrid';
+import PlanetImage from '../../components/planet/PlanetImage';
 
-export default function Home() {
+export default function Planet() {
   return (
     <>
       <Head>
@@ -18,6 +20,7 @@ export default function Home() {
       <Header />
       <main>
         <PlanetGrid>
+          <PlanetImage />
           <Content />
           <StatCards />
           <Controls />
