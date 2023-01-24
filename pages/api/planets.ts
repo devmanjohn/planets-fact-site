@@ -127,6 +127,11 @@ export default function handler(
         planet: './assets/planet-earth.svg',
         internal: './assets/planet-earth-internal.svg',
         geology: './assets/geology-earth.png',
+        sizes: {
+          mobile: 173,
+          tablet: 285,
+          desktop: 450,
+        },
       },
     },
     {
@@ -154,6 +159,11 @@ export default function handler(
         planet: './assets/planet-mars.svg',
         internal: './assets/planet-mars-internal.svg',
         geology: './assets/geology-mars.png',
+        sizes: {
+          mobile: 129,
+          tablet: 213,
+          desktop: 336,
+        },
       },
     },
     {
@@ -182,6 +192,11 @@ export default function handler(
         planet: './assets/planet-jupiter.svg',
         internal: './assets/planet-jupiter-internal.svg',
         geology: './assets/geology-jupiter.png',
+        sizes: {
+          mobile: 224,
+          tablet: 369,
+          desktop: 582,
+        },
       },
     },
     {
@@ -209,6 +224,11 @@ export default function handler(
         planet: './assets/planet-saturn.svg',
         internal: './assets/planet-saturn-internal.svg',
         geology: './assets/geology-saturn.png',
+        sizes: {
+          mobile: 256,
+          tablet: 422,
+          desktop: 666.09,
+        },
       },
     },
     {
@@ -236,6 +256,11 @@ export default function handler(
         planet: './assets/planet-uranus.svg',
         internal: './assets/planet-uranus-internal.svg',
         geology: './assets/geology-uranus.png',
+        sizes: {
+          mobile: 176,
+          tablet: 290,
+          desktop: 458,
+        },
       },
     },
     {
@@ -263,6 +288,11 @@ export default function handler(
         planet: './assets/planet-neptune.svg',
         internal: './assets/planet-neptune-internal.svg',
         geology: './assets/geology-neptune.png',
+        sizes: {
+          mobile: 173,
+          tablet: 285,
+          desktop: 450,
+        },
       },
     },
   ]);
