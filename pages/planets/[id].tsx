@@ -7,8 +7,9 @@ import Content, { StatCards } from '../../components/planet/Content';
 import Controls from '../../components/planet/Controls';
 import PlanetGrid from '../../components/PlanetGrid';
 import PlanetImage from '../../components/planet/PlanetImage';
+import PlanetModel from '../../models/Planet';
 
-export default function Planet() {
+export default function Planet({ planetData }: { planetData: PlanetModel }) {
   return (
     <>
       <Head>
@@ -20,6 +21,7 @@ export default function Planet() {
       <Header />
       <main>
         <PlanetGrid>
+          <p>{planetData.name}</p>
           <PlanetImage />
           <Content />
           <StatCards />
@@ -28,4 +30,20 @@ export default function Planet() {
       </main>
     </>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const res = await fetch('http://localhost:3000/api/planets');
+  const data = await res.json();
+
+  const planetData = await data.find(
+    (planet: PlanetModel) =>
+      planet.name.toLowerCase() === context.query.id.toLowerCase()
+  );
+
+  console.log(context.query);
+
+  return {
+    props: { planetData },
+  };
 }
