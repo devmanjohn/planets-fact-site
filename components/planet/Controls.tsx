@@ -12,7 +12,11 @@ const CONTROLS = [
   },
 ];
 
-export default function Controls({ setContentToDisplay }) {
+export default function Controls({
+  setContentToDisplay,
+}: {
+  setContentToDisplay: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const [activeContent, setActiveContent] = useState('Overview');
 
   return (
@@ -37,8 +41,8 @@ type ControlButtonProps = {
   index: Number;
   title: String;
   isActive?: Boolean;
-  // setActiveContent needs typing
-  // setContentToDisplay needs typing
+  setActiveContent: React.Dispatch<React.SetStateAction<string>>;
+  setContentToDisplay: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export function ControlButton({
@@ -49,7 +53,7 @@ export function ControlButton({
   setContentToDisplay,
 }: ControlButtonProps) {
   const clickHandler = () => {
-    setActiveContent(title);
+    setActiveContent(`${title}`);
     setContentToDisplay(index);
   };
 
