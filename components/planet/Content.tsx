@@ -1,18 +1,19 @@
 import React from 'react';
 
-export default function Content() {
+type ContentProps = {
+  content: string;
+  planetName: string;
+  source: string;
+};
+
+export default function Content({ content, source, planetName }: ContentProps) {
   return (
     <section className='col-span-3'>
-      <h1 className='text-4xl uppercase'>Venus</h1>
-      <p className='mt-4 px-4 leading-[22px] opacity-80'>
-        Third planet from the Sun and the only known planet to harbor life.
-        About 29.2% of Earth's surface is land with remaining 70.8% is covered
-        with water. Earth's distance from the Sun, physical properties and
-        geological history have allowed life to evolve and thrive.
-      </p>
+      <h1 className='text-4xl uppercase'>{planetName}</h1>
+      <p className='mt-4 px-4 leading-[22px] opacity-80'>{content}</p>
       <span className='flex mt-4 justify-center gap-2 '>
         <span className='opacity-50'>Source : </span>
-        <a href='https://wikipedia.com/' target='_blank'>
+        <a href={`${source}`} target='_blank'>
           <span className='underline mr-1 opacity-50'>Wikipedia</span>
           <svg
             className='inline-block'
@@ -32,22 +33,25 @@ export default function Content() {
   );
 }
 
-export function StatCards() {
+export function StatCards({
+  data,
+}: {
+  data: { title: string; fact: string }[];
+}) {
   return (
     <section className='col-span-3 px-6 mt-8 flex flex-col gap-4 mb-8'>
-      <StatCard />
-      <StatCard />
-      <StatCard />
-      <StatCard />
+      {data.map(({ title, fact }: { title: string; fact: string }) => {
+        return <StatCard title={title} fact={fact} />;
+      })}
     </section>
   );
 }
 
-export function StatCard() {
+export function StatCard({ title, fact }: { title: string; fact: string }) {
   return (
     <div className='border flex justify-between p-4 px-6 custom-border-color'>
-      <h3 className='opacity-50 uppercase tracking-[1px]'>Rotation Time</h3>
-      <h4 className='uppercase tracking-[1px]'>243 Days</h4>
+      <h3 className='opacity-50 uppercase tracking-[1px]'>{title}</h3>
+      <h4 className='uppercase tracking-[1px]'>{fact}</h4>
     </div>
   );
 }
