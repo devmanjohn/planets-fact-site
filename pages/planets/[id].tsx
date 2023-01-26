@@ -59,7 +59,7 @@ export default function Planet({ planetData }: { planetData: PlanetModel }) {
             planetName={planetData.name}
           />
           <StatCards data={statData} />
-          <Controls />
+          <Controls setContentToDisplay={setContentToDisplay} />
         </PlanetGrid>
       </main>
     </>

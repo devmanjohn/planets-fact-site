@@ -12,18 +12,20 @@ const CONTROLS = [
   },
 ];
 
-export default function Controls() {
+export default function Controls({ setContentToDisplay }) {
   const [activeContent, setActiveContent] = useState('Overview');
 
   return (
     <section className='col-span-4 row-start-1 px-4 border-b custom-border-color flex justify-between'>
-      {CONTROLS.map(({ title }) => {
+      {CONTROLS.map(({ title }, index) => {
         const isActive = title === activeContent ? true : false;
         return (
           <ControlButton
             title={title}
             isActive={isActive}
             setActiveContent={setActiveContent}
+            setContentToDisplay={setContentToDisplay}
+            index={index}
           />
         );
       })}
@@ -32,18 +34,23 @@ export default function Controls() {
 }
 
 type ControlButtonProps = {
+  index: Number;
   title: String;
   isActive?: Boolean;
   // setActiveContent needs typing
+  // setContentToDisplay needs typing
 };
 
 export function ControlButton({
+  index,
   title,
   isActive,
   setActiveContent,
+  setContentToDisplay,
 }: ControlButtonProps) {
   const clickHandler = () => {
     setActiveContent(title);
+    setContentToDisplay(index);
   };
 
   return (
