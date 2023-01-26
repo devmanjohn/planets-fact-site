@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 
 // components
@@ -10,6 +10,37 @@ import PlanetImage from '../../components/planet/PlanetImage';
 import PlanetModel from '../../models/Planet';
 
 export default function Planet({ planetData }: { planetData: PlanetModel }) {
+  const [contentToDisplay, setContentToDisplay] = useState(0);
+
+  // dynamic data to display
+  const [contentData, setContentData] = useState(planetData.structure.content);
+  const [sourceData, setSourceData] = useState(planetData.structure.source);
+
+  useEffect(() => {
+    switch (contentToDisplay) {
+      case 0:
+        setContentData(planetData.overview.content);
+        setSourceData(planetData.overview.source);
+        break;
+
+      case 1:
+        setContentData(planetData.structure.content);
+        setSourceData(planetData.structure.source);
+        break;
+
+      case 2:
+        setContentData(planetData.geology.content);
+        setSourceData(planetData.geology.source);
+        break;
+    }
+  }, [contentToDisplay]);
+
+  const statData = [
+    { title: 'rotation-time', fact: planetData.rotation },
+    { title: 'revolution time', fact: planetData.revolution },
+    { title: 'radius', fact: planetData.radius },
+    { title: 'average temp.', fact: planetData.temperature },
+  ];
   return (
     <>
       <Head>
@@ -21,10 +52,13 @@ export default function Planet({ planetData }: { planetData: PlanetModel }) {
       <Header />
       <main>
         <PlanetGrid>
-          <p>{planetData.name}</p>
           <PlanetImage />
-          <Content />
-          <StatCards />
+          <Content
+            content={contentData}
+            source={sourceData}
+            planetName={planetData.name}
+          />
+          <StatCards data={statData} />
           <Controls />
         </PlanetGrid>
       </main>
@@ -40,8 +74,6 @@ export async function getServerSideProps(context: any) {
     (planet: PlanetModel) =>
       planet.name.toLowerCase() === context.query.id.toLowerCase()
   );
-
-  console.log(context.query);
 
   return {
     props: { planetData },
