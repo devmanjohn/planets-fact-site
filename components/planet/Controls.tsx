@@ -15,9 +15,9 @@ const CONTROLS = [
 export default function Controls({
   setContentToDisplay,
 }: {
-  setContentToDisplay: React.Dispatch<React.SetStateAction<number>>;
+  setContentToDisplay: React.Dispatch<React.SetStateAction<Number>>;
 }) {
-  const [activeContent, setActiveContent] = useState('Overview');
+  const [activeContent, setActiveContent] = useState<String>('Overview');
 
   return (
     <section className='col-span-4 row-start-1 px-4 border-b custom-border-color flex justify-between'>
@@ -41,8 +41,8 @@ type ControlButtonProps = {
   index: Number;
   title: String;
   isActive?: Boolean;
-  setActiveContent: React.Dispatch<React.SetStateAction<string>>;
-  setContentToDisplay: React.Dispatch<React.SetStateAction<number>>;
+  setActiveContent: React.Dispatch<React.SetStateAction<String>>;
+  setContentToDisplay: React.Dispatch<React.SetStateAction<Number>>;
 };
 
 export function ControlButton({

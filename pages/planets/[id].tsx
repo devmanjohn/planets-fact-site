@@ -10,7 +10,7 @@ import PlanetImage from '../../components/planet/PlanetImage';
 import PlanetModel from '../../models/Planet';
 
 export default function Planet({ planetData }: { planetData: PlanetModel }) {
-  const [contentToDisplay, setContentToDisplay] = useState(0);
+  const [contentToDisplay, setContentToDisplay] = useState<Number>(0);
 
   // dynamic data to display
   const [contentData, setContentData] = useState(planetData.structure.content);
@@ -66,16 +66,34 @@ export default function Planet({ planetData }: { planetData: PlanetModel }) {
   );
 }
 
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: { query: { id: String } }) {
   const res = await fetch('http://localhost:3000/api/planets');
   const data = await res.json();
 
-  const planetData = await data.find(
-    (planet: PlanetModel) =>
-      planet.name.toLowerCase() === context.query.id.toLowerCase()
-  );
+  if (!context.query.id) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  } else {
+    const planetData = await data.find(
+      (planet: PlanetModel) =>
+        planet.name.toLowerCase() === context.query.id.toLowerCase()
+    );
 
-  return {
-    props: { planetData },
-  };
+    if (!planetData) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      };
+    }
+
+    return {
+      props: { planetData },
+    };
+  }
 }
