@@ -14,33 +14,56 @@ export default function Planet({ planetData }: { planetData: PlanetModel }) {
 
   // dynamic data to display
   const [contentData, setContentData] = useState(planetData.structure.content);
+  const [planetImage, setPlanetImage] = useState(planetData.images.planet);
   const [sourceData, setSourceData] = useState(planetData.structure.source);
 
+  // determine what content to display based on active buttons
   useEffect(() => {
     switch (contentToDisplay) {
       case 0:
         setContentData(planetData.overview.content);
         setSourceData(planetData.overview.source);
+        setPlanetImage(planetData.images.planet);
         break;
 
       case 1:
         setContentData(planetData.structure.content);
         setSourceData(planetData.structure.source);
+        setPlanetImage(planetData.images.internal);
         break;
 
       case 2:
         setContentData(planetData.geology.content);
         setSourceData(planetData.geology.source);
+        setPlanetImage(planetData.images.planet);
         break;
     }
   }, [contentToDisplay]);
 
+  // contain stat data for children
   const statData = [
     { title: 'rotation-time', fact: planetData.rotation },
     { title: 'revolution time', fact: planetData.revolution },
     { title: 'radius', fact: planetData.radius },
     { title: 'average temp.', fact: planetData.temperature },
   ];
+
+  // determine screen size so images can be adjusted
+  const [currentWidth, setWidth] = useState<Number>(0);
+  const [imageSize, setImageSize] = useState<Number>(0);
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+
+    if (currentWidth <= 375) {
+      setImageSize(planetData.images.sizes.mobile);
+    } else if (currentWidth >= 376 && currentWidth <= 1024) {
+      setImageSize(planetData.images.sizes.tablet);
+    } else {
+      setImageSize(planetData.images.sizes.desktop);
+    }
+  });
+
   return (
     <>
       <Head>
@@ -52,7 +75,7 @@ export default function Planet({ planetData }: { planetData: PlanetModel }) {
       <Header />
       <main>
         <PlanetGrid>
-          <PlanetImage />
+          <PlanetImage planetImage={planetImage} size={imageSize} />
           <Content
             content={contentData}
             source={sourceData}
