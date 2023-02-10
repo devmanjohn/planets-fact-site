@@ -20,7 +20,7 @@ export default function Controls({
   const [activeContent, setActiveContent] = useState<String>('Overview');
 
   return (
-    <section className='col-span-4 row-start-1 px-4 border-b custom-border-color flex justify-between'>
+    <section className='col-span-4 row-start-1 px-4 border-b custom-border-color flex justify-between md:col-span-2 md:flex-col md:row-start-2 md:px-10 md:border-0'>
       {CONTROLS.map(({ title }, index) => {
         const isActive = title === activeContent ? true : false;
         return (
@@ -62,7 +62,7 @@ export function ControlButton({
       onClick={clickHandler}
       className={`
       uppercase tracking-[1px] border-b-4 py-4
-      ${isActive ? 'border-earth' : 'border-transparent'}`}
+      ${isActive ? 'border-earth' : 'border-transparent'} md:border-b-0`}
     >
       <span className='hidden'>03</span>
       <p className={`${isActive ? 'opacity-100' : 'opacity-50'}`}>{title}</p>

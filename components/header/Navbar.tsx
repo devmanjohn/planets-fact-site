@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React, { useState } from 'react';
 
 const PLANET_LINKS = [
@@ -64,7 +63,7 @@ type NavProps = {
 export const NavItem = ({ title, url, color }: NavProps) => {
   return (
     <li className='nav-item text-white uppercase px-8 md:px-0'>
-      <Link
+      <a
         className='
         group flex items-center py-6 border-b custom-border-color tracking-[2px] text-sm 
         md:border-none md:py-0 md:opacity-50 
@@ -86,7 +85,7 @@ export const NavItem = ({ title, url, color }: NavProps) => {
         >
           <path fill='none' stroke='#FFF' opacity='.4' d='M1 0l4 4-4 4' />
         </svg>
-      </Link>
+      </a>
     </li>
   );
 };

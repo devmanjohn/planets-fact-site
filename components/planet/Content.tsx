@@ -8,10 +8,10 @@ type ContentProps = {
 
 export default function Content({ content, source, planetName }: ContentProps) {
   return (
-    <section className='col-span-3'>
+    <section className='col-span-3 md:col-span-2 md:text-left md:row-start-2 px-10'>
       <h1 className='text-4xl uppercase'>{planetName}</h1>
-      <p className='mt-4 px-4 leading-[22px] opacity-80'>{content}</p>
-      <span className='flex mt-4 justify-center gap-2 '>
+      <p className='mt-4 px-4 leading-[22px] opacity-80 md:px-0'>{content}</p>
+      <span className='flex mt-4 justify-center gap-2 md:justify-start md:mt-8 '>
         <span className='opacity-50'>Source : </span>
         <a href={`${source}`} target='_blank'>
           <span className='underline mr-1 opacity-50'>Wikipedia</span>
@@ -39,7 +39,7 @@ export function StatCards({
   data: { title: string; fact: string }[];
 }) {
   return (
-    <section className='col-span-3 px-6 mt-8 flex flex-col gap-4 mb-8'>
+    <section className='col-span-3 px-6 mt-8 flex flex-col gap-4 mb-8 md:col-span-4 md:flex-row md:px-10'>
       {data.map(({ title, fact }: { title: string; fact: string }) => {
         return <StatCard title={title} fact={fact} />;
       })}
@@ -49,9 +49,13 @@ export function StatCards({
 
 export function StatCard({ title, fact }: { title: string; fact: string }) {
   return (
-    <div className='border flex justify-between p-4 px-6 custom-border-color'>
-      <h3 className='opacity-50 uppercase tracking-[1px]'>{title}</h3>
-      <h4 className='uppercase tracking-[1px]'>{fact}</h4>
+    <div className='border flex justify-between p-4 px-6 items-center custom-border-color md:flex-col md:text-left md:w-full md:justify-center md:items-start'>
+      <h3 className='opacity-50 uppercase tracking-[1px] text-[10px] font-light'>
+        {title}
+      </h3>
+      <h4 className='uppercase tracking-[1px] font-antonio text-xl md:mt-2'>
+        {fact}
+      </h4>
     </div>
   );
 }

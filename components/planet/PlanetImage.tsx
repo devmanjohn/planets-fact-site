@@ -9,7 +9,7 @@ export default function PlanetImage({
   size: Number;
 }) {
   return (
-    <figure className='relative w-full h-full col-span-3 grid justify-center my-14'>
+    <figure className='relative w-full h-full col-span-3 grid justify-center my-14 md:col-span-4 md:mt-20 md:mb-20'>
       <Image
         src={`.${planetImage}`}
         width={size}

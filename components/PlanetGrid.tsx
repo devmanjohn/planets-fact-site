@@ -5,5 +5,9 @@ type PlanetGridProps = {
 };
 
 export default function PlanetGrid({ children }: PlanetGridProps) {
-  return <div className='grid grid-cols-3 text-center'>{children}</div>;
+  return (
+    <div className='grid grid-cols-3 text-center md:grid-cols-4'>
+      {children}
+    </div>
+  );
 }
